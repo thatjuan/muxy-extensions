@@ -1,0 +1,22 @@
+{
+  "name": "muxy-project-jumper",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "muxy": {
+    "description": "Spotlight-style project switcher on a keyboard shortcut.",
+    "permissions": ["projects:read", "projects:write", "commands:run-script"],
+    "commands": [
+      {
+        "id": "jump",
+        "title": "Jump to Project",
+        "subtitle": "Search projects by name or path",
+        "defaultShortcut": "cmd+shift+j",
+        "action": { "kind": "runScript", "script": "scripts/jump.js" }
+      }
+    ]
+  }
+}

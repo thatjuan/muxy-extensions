@@ -7,8 +7,17 @@
     "build": "node build.mjs"
   },
   "muxy": {
+    "$schema": "https://raw.githubusercontent.com/muxy-app/muxy/main/docs/extensions/schema/manifest.schema.json",
     "description": "Spotlight-style project switcher on a keyboard shortcut.",
     "permissions": ["projects:read", "projects:write", "commands:run-script"],
+    "marketplace": {
+      "author": "Juan",
+      "github": "thatjuan",
+      "repository": "https://github.com/thatjuan/muxy-extensions",
+      "categories": ["productivity", "developer-tools"],
+      "icon": "assets/icon.svg",
+      "screenshots": ["assets/screenshots/screenshot-1.png"]
+    },
     "commands": [
       {
         "id": "jump",

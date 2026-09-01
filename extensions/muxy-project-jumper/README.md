@@ -34,8 +34,10 @@ Then **Load Unpacked** in Muxy's Extensions modal, pointing at this directory
 (not its `dist/` — Muxy finds that itself). After each rebuild, hit **Reload** in
 that modal; Reload alone does not rebuild.
 
-`build.mjs` copies `package.json` and `src/jump.js` into `dist/`. Only `dist/`
-ships on publish, which is why the manifest has to be copied inside it.
+`build.mjs` copies `package.json`, `src/jump.js` and `assets/` into `dist/`.
+Only `dist/` ships on publish, which is why the manifest has to be copied inside
+it — and why the listing assets do too, since the marketplace validator resolves
+`marketplace.icon` and `marketplace.screenshots` against the build output.
 
 ## Permissions
 
@@ -44,3 +46,19 @@ ships on publish, which is why the manifest has to be copied inside it.
 | `projects:read` | `muxy.projects.list()` |
 | `projects:write` | `muxy.projects.switchTo()` |
 | `commands:run-script` | the `runScript` command action |
+
+## Publishing status
+
+Everything the marketplace validator checks passes except one thing: there is no
+screenshot yet. `marketplace.screenshots` points at
+`assets/screenshots/screenshot-1.png`, which has to be a PNG at 16:10 or 16:9
+showing the overlay in use. Capture it, drop it at that path, rebuild, and the
+extension is ready to copy into a fork of
+[`muxy-app/extensions`](https://github.com/muxy-app/extensions).
+
+Verified with the registry's own tooling:
+
+```sh
+node scripts/validate.mjs muxy-project-jumper
+node scripts/pack.mjs --dry-run muxy-project-jumper
+```
